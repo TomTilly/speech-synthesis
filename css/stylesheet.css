@@ -43,6 +43,7 @@ form {
 h1 {
   background: rgb(255, 223, 127);
   color: rgb(77, 77, 77);
+  text-shadow: 2px 2px 0 rgb(255, 255, 255);
   text-align: center;
   margin: 0;
   padding: .6em;
