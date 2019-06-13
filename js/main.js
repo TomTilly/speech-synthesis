@@ -6,8 +6,6 @@ const stopButton = document.querySelector('.stop');
 const startButton = document.querySelector('.start');
 let voices;
 
-utterance.text = textarea.value;
-
 function populateVoices() {
   voices = this.getVoices();
   voiceSelectEl.innerHTML = voices
@@ -23,11 +21,17 @@ function alterVoice() {
   utterance[this.id] = this.value;
 }
 
+function setUtteranceText() {
+  utterance.text = this.value;
+}
+
 speechSynthesis.addEventListener('voiceschanged', populateVoices);
 
 voiceSelectEl.addEventListener('change', setVoice);
 
 rangeEls.forEach(rangeEl => rangeEl.addEventListener('input', alterVoice));
+
+textarea.addEventListener('change', setUtteranceText);
 
 startButton.addEventListener('click', (e) => {
   e.preventDefault();
@@ -38,3 +42,5 @@ stopButton.addEventListener('click', (e) => {
   e.preventDefault();
   speechSynthesis.cancel();
 });
+
+setUtteranceText.call(textarea);
