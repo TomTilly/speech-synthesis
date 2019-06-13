@@ -1,7 +1,6 @@
 const utterance = new SpeechSynthesisUtterance();
-const voiceSelectEl = document.getElementById('voice-select')
-const rateEl = document.getElementById('rate');
-const pitchEl = document.getElementById('pitch');
+const voiceSelectEl = document.getElementById('voice-select');
+const rangeEls = document.querySelectorAll('[type="range"');
 const textarea = document.querySelector('textarea');
 const stopButton = document.querySelector('.stop');
 const startButton = document.querySelector('.start');
@@ -20,9 +19,15 @@ function setVoice() {
   utterance.voice = voices.find(voice => this.value === voice.name);
 }
 
+function alterVoice() {
+  utterance[this.id] = this.value;
+}
+
 speechSynthesis.addEventListener('voiceschanged', populateVoices);
 
 voiceSelectEl.addEventListener('change', setVoice);
+
+rangeEls.forEach(rangeEl => rangeEl.addEventListener('input', alterVoice));
 
 startButton.addEventListener('click', (e) => {
   e.preventDefault();
